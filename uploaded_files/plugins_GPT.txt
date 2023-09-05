@@ -1,0 +1,7 @@
+XPapers:Este plugin proporciona acceso a investigaciones académicas y científicas.
+Cursos de universidades: Este plugin puede encontrar cursos en línea de universidades de todo el mundo.
+Box Script: Este plugin puede resumir videos de YouTube.
+Photo Realistic: Este plugin genera prompts optimizados para My Journey, una herramienta de generación de imágenes.
+Chrome Perfect: Este plugin mejora los prompts para ChatGPT.
+Ask Your PDF: Este plugin puede resumir o proporcionar información sobre un PDF.
+Speak: Este plugin puede ayudarte a entender expresiones o palabras en un idioma extranjero.

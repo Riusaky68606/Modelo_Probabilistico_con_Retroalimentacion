@@ -1,0 +1,58 @@
+Sí, puedes utilizar código para crear las tarjetas de forma más rápida en Anki. Aquí hay un ejemplo de cómo podrías hacerlo utilizando el complemento "AnkiConnect" y Python:
+
+1. Instala el complemento "AnkiConnect" en Anki. Puedes encontrarlo en el repositorio de complementos de Anki.
+
+2. Asegúrate de tener Python instalado en tu computadora.
+
+3. Abre un editor de texto o un IDE de Python y crea un nuevo archivo.
+
+4. Importa la biblioteca de solicitudes (requests) en tu archivo:
+
+```python
+import requests
+```
+
+5. Define una función para crear las tarjetas en Anki:
+
+```python
+def crear_tarjeta(pregunta, respuesta):
+    url = 'http://localhost:8765'
+    deck_name = 'Nombre de tu baraja'
+    
+    data = {
+        'action': 'addNote',
+        'version': 6,
+        'params': {
+            'note': {
+                'deckName': deck_name,
+                'modelName': 'Basic',
+                'fields': {
+                    'Front': pregunta,
+                    'Back': respuesta
+                },
+                'options': {
+                    'allowDuplicate': False
+                },
+                'tags': []
+            }
+        }
+    }
+    
+    response = requests.post(url, json=data)
+    print(response.text)
+```
+
+6. Llama a la función `crear_tarjeta` y pasa las preguntas y respuestas correspondientes:
+
+```python
+pregunta1 = '¿Qué opciones se presentan para interactuar con un Smart TV en el documento?'
+respuesta1 = 'Las opciones presentadas son: el control remoto estándar, el control remoto slimline de Apple y el nuevo teclado de Minnum.'
+
+crear_tarjeta(pregunta1, respuesta1)
+
+# Repite el proceso para las demás preguntas y respuestas
+```
+
+7. Ejecuta el código y verificarás que se creen las tarjetas en tu baraja de Anki.
+
+Este es solo un ejemplo básico. Puedes modificar y personalizar el código según tus necesidades, como agregar más campos a las tarjetas o ajustar las opciones de estudio. Recuerda que necesitas tener el complemento "AnkiConnect" instalado y que Anki esté abierto para que funcione correctamente.

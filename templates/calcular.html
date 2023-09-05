@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+
+
+            <div style="padding:50px;">
+                <h3>TABLA DE FRECUENCIAS</h3>
+                <div style="display: flex; width: auto;" class="box-doc">
+                    <div style=" overflow-y: auto;">
+                        {%if V:%}
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <th></th>
+                                {%for w in V:%}
+                                <th>{{w}}</th>
+                                {%endfor%}
+                            </thead>
+                            <tbody>
+                                {%for d in frecuencias:%}
+                                <tr>
+                                    <th>d{{loop.index}}</th>
+                                    {%for f in d:%}
+                                    <td>{{f}}</td>
+                                    {%endfor%}
+                                </tr>
+                                {%endfor%}
+                                <tr>
+                                    <th>ni</th>
+                                    {%for f in ni:%}
+                                    <td>{{f}}</td>
+                                    {%endfor%}
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        {%else:%}
+
+                        <h4>No existe informacion suficiente para calcular</h4>
+
+                        {%endif%}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 box-doc mx-auto">
+
+            <div style="padding:50px;">
+                <h3>TABLA DE PESOS</h3>
+                
+                        {%if tabla_pesos:%}
+                        <div style="display: flex; width:490px;" class="box-doc">
+                            <div style=" overflow-y: auto;height: 500px;">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <th>Palabra</th>
+                                <th>t</th>
+                                <th>ni</th>
+                                <th>qi</th>
+                                <th>ci</th>
+                            </thead>
+                            <tbody>
+                                {%for r in tabla_pesos:%}
+                                <tr>
+                                    {%for el in r:%}
+                                    <td>{{el}}</td>
+                                    {%endfor%}
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                        {%else:%}
+                        <h4>No existe informacion suficiente para calcular</h4>
+                        {%endif%}
+                  
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

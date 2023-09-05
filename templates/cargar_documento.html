@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+
+    <div class="col-md-6 box-doc-right">
+        <div style="padding: 50px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <h3>CARGAR DOCUMENTOS</h3>
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" value="0" id="tipo_post" name="tipo_post">
+                <br>
+                <div>
+                    <label for="texto">Introducir texto:</label>
+                    <input style="width: 200px;" type="text" id="texto" name="texto" class="form-control">
+                </div>
+                <br>
+                <div>
+                    <label for="documento">Cargar documento:</label>
+                    <input style="width: 300px;" type="file" id="documento" name="documento" accept=".txt"
+                        class="form-control">
+                </div>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Cargar documento">
+            </form>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div style="padding:50px;">
+            <h3>
+                DOCUMENTOS
+            </h3>
+            {%if ed == 0:%}
+            <h4>No hay documentos cargados</h4>
+            {% else %}
+            {%for doc in docs%}
+
+            <form method="POST" enctype="multipart/form-data">
+                <div>
+                    <input type="hidden" value="{{loop.index}}" id="doc_index" name="doc_index">
+                    <input type="hidden" value="1" id="tipo_post" name="tipo_post">
+                </div>
+                <div style="display: flex; width:500px; background-color: #f4f4f4;" class="box-doc">
+                    <div style="max-height: 150px; overflow-y: auto;">
+                        <p style="width:460px;">{{doc}}</p>
+                    </div>
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                </div>
+
+
+            </form>
+            {%endfor%}
+            <br>
+            <form method="POST" enctype="multipart/form-data">
+                <div>
+                    <input type="hidden" value="2" id="tipo_post" name="tipo_post">
+                </div>
+                <button class="btn btn-success">Limpiar</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

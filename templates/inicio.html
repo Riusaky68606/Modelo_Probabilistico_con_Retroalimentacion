@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">REALIZA UNA CONSULTA</h1>
+<!--<p>Aquí puedes cargar documentos, calcular frecuencias y relevancias y consultar documentos similares.</p>-->
+<div>
+    <div class="m-auto" style="padding:50px; margin:auto;">
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" value="3" id="tipo_post" name="tipo_post">
+            <br>
+            <div>
+                <label for="consulta">Realizar consulta:</label>
+                <input style="width: 200px;" type="text" id="consulta" name="consulta" class="form-control">
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Buscar">
+        </form>
+        <br>
+        {%if not_ready:%}
+        <div class="card">
+            <h4>No existe informacion suficiente para realizar una consulta</h4>
+        </div>
+        {%endif%}
+    </div>
+</div>
+<div class="row">
+    {%if sim:%}
+    <h4 class="text-center">Resultados para la consulta: "{{consulta}}"</h4>
+    <h5 class="text-center">Tiempo de respuesta: {{tiempo}} segundos</h5>
+    <div class="col-md-6">
+        <div style="padding:50px;">
+            <h3>TABLA DE SIMILITUD</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th ></th>
+                    <th >sim</th>
+                </thead>
+                <tbody>
+                    {%for s in sim:%}
+                    <tr>
+                        <th> d{{loop.index}}</th>
+                        
+                        <td >{{s}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div style="padding:50px;">
+            <h3>ORDEN DE RELEVANCIA DE DOCUMENTOS</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th >Nuevo orden</th>
+                </thead>
+                <tbody>
+                    {%for row in orden_docs:%}
+                    <tr>
+                        {%for el in row:%}
+                        <th>{{el}}</th>
+                        {%endfor%}
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ... (código existente) ... -->
+
+<div class="col-md-6">
+    <div style="padding:50px;">
+        <h3>Seleccione los documentos relevantes</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <th>Nuevo orden</th>
+                <th>Marcar como relevante</th>
+            </thead>
+            <tbody>
+                {% for row in orden_docs %}
+                <tr>
+                    <td>
+                        {% for el in row %}
+                        {{ el }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <input type="checkbox" name="documentos_relevantes[]" value="{{ loop.index }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- Sección para documentos no relevantes -->
+        <h3>Seleccione los documentos no relevantes</h3>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <th>Nuevo orden</th>
+                <th>Marcar como no relevante</th>
+            </thead>
+            <tbody>
+                {% for row in orden_docs %}
+                <tr>
+                    <td>
+                        {% for el in row %}
+                        {{ el }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <input type="checkbox" name="documentos_no_relevantes[]" value="{{ loop.index }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            <form action="/consulta_mejorada" method="post">
+    <input class="btn btn-primary" type="submit" value="Mejorar Consulta">
+</form>
+        </form>
+    </div>
+</div>
+
+
+
+    {%endif%}
+</div>
+
+<br>
+
+{% endblock %}

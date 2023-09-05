@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Realizar consulta</h1>
+
+<form action="{{ url_for('consultar') }}" method="post">
+    <input type="text" name="consulta" required>
+    <input type="submit" value="Realizar Consulta">
+</form>
+
+{% if consulta %}
+<p>Realizaste una consulta: {{ consulta }}</p>
+{% for doc in documentos %}
+<p>{{ doc }} <input type="checkbox" name="relevantes" value="{{ doc }}"> Relevante <input type="checkbox" name="no_relevantes" value="{{ doc }}"> No relevante</p>
+{% endfor %}
+<button onclick="goBack()">Atrás</button>
+{% endif %}
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}
